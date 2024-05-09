@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="minimum-scale=1, initial-scale=1, width=device-width"
-    />
-    <title>Invalid URL!</title>
-  </head>
-  <body>
-    <p>Short URL is invalid! (Or you have been spamming the site too much)</p>
-    <p>
-      <a href="https://github.com/nelsontky/gh-pages-url-shortener">
-        Learn more about this URL shortener
-      </a>
-    </p>
-  </body>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url(https://fonts.googleapis.com/css2?family=Source+Code+Pro);
+.title {
+	font-family: Source Code Pro;
+	font-weight: 400;
+	color: white;
+	text-align: center;
+    font-size: 50px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.50));
+}
+.message {
+	font-family: Source Code Pro;
+	font-weight: 400;
+	color: white;
+}
+html {
+	background-color: #131213;
+    text-align: center;
+}
+</style>
+<br><br><br>
+<head>
+	<title>Missing Page</title>
+</head>
+<body>
+	<a class="title">ERROR 404</a>
+	<br><hr style="border-color: gray; width: 70%; max-width: 500px;"><br>
+	<a class="message">It doesn't seem like I put a page at this link. Maybe try asking me for a different link?	<br><br><p onclick="encode()">:p</p></a>
+</body>
+<script>
+function encode() {
+  var output = btoa(parseInt(prompt("Issue")) + (10)).replace(/=/g, " ");
+  alert(output);
+}
+</script>
 </html>
