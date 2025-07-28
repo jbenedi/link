@@ -12,4 +12,4 @@ Forked From: https://github.com/nelsontky/gh-pages-url-shortener
 
 ## Example
 
-Example shortened link: https://jbenedict.work/link/MTI
+Example shortened link: https://jbenedict.com/link/MTM
