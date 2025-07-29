@@ -4,7 +4,7 @@ const { Octokit } = require('@octokit/rest');
 
 (async () => {
   try {
-    const token = core.getInput('token');
+    const token = process.env.INPUT_TOKEN;
     const octokit = new Octokit({ auth: token });
 
     const { owner, repo } = github.context.repo;
