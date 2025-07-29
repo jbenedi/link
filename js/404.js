@@ -11,7 +11,7 @@
     const decoded = parseInt(atob(encoded)) - 10;
     if (isNaN(decoded)) throw new Error();
 
-    const fallback = '/';
+    const fallback = 'https://jbenedict.com/link';
     const issueUrl = baseUrl + decoded;
 
     fetch(issueUrl)
