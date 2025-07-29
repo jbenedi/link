@@ -1,21 +1,22 @@
-const { Octokit } = require('@octokit/rest');
+import { Octokit } from '@octokit/rest';
+import { readFileSync } from 'fs';
 
 const token = process.env.INPUT_TOKEN;
 const repo = process.env.GITHUB_REPOSITORY;
 const eventPath = process.env.GITHUB_EVENT_PATH;
 
-(async () => {
+const main = async () => {
   try {
     if (!token || !repo || !eventPath) {
-      throw new Error("Missing GitHub token or event context");
+      throw new Error("Missing GitHub token or context");
     }
 
     const [owner, repoName] = repo.split("/");
-    const event = require(eventPath);
+    const event = JSON.parse(readFileSync(eventPath, 'utf8'));
 
     const issueNumber = event.issue?.number;
     if (!issueNumber) {
-      throw new Error("No issue number found in event payload");
+      throw new Error("No issue number found");
     }
 
     const octokit = new Octokit({ auth: token });
@@ -26,7 +27,7 @@ const eventPath = process.env.GITHUB_EVENT_PATH;
       .replace(/\+/g, "-")
       .replace(/\//g, "_");
 
-    const shortUrl = `https://jbenedi.work/link/${shortCode}`;
+    const shortUrl = `https://jbenedict.com/link/${shortCode}`;
 
     await octokit.issues.createComment({
       owner,
@@ -40,4 +41,6 @@ const eventPath = process.env.GITHUB_EVENT_PATH;
     console.error(err);
     process.exit(1);
   }
-})();
+};
+
+main();
