@@ -10,9 +10,16 @@ jobs:
   chat:
     name: Link Response
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Link Response
-        uses: ./
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '18'
+
+      - name: Run Link Shortener Script
+        run: node js/ref.js
+        env:
+          INPUT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
