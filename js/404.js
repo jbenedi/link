@@ -1,5 +1,3 @@
-// 404.js (used by GitHub Pages for redirect logic)
-
 (function redirect() {
   const baseUrl = 'https://api.github.com/repos/jbenedi/link/issues/';
   const pathParts = window.location.pathname.split('/');
