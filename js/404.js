@@ -5,13 +5,17 @@
   const pathParts = window.location.pathname.split('/');
   const encoded = pathParts[2];
 
-  if (!encoded) return;
+  const fallback = 'https://jbenedict.com/link';
+
+  if (!encoded) {
+    window.location.replace(fallback);
+    return;
+  }
 
   try {
     const decoded = parseInt(atob(encoded)) - 10;
     if (isNaN(decoded)) throw new Error();
 
-    const fallback = 'https://jbenedict.com/link';
     const issueUrl = baseUrl + decoded;
 
     fetch(issueUrl)
@@ -21,7 +25,10 @@
         try {
           const dest = new URL(url);
           if (dest.hostname !== window.location.hostname) {
-            window.location.replace(url);
+            // Try loading the target URL to verify it's reachable
+            fetch(dest.href, { method: 'HEAD', mode: 'no-cors' })
+              .then(() => window.location.replace(dest.href))
+              .catch(() => window.location.replace(fallback));
           } else {
             window.location.replace(fallback);
           }
@@ -31,6 +38,6 @@
       })
       .catch(() => window.location.replace(fallback));
   } catch {
-    window.location.replace('/');
+    window.location.replace(fallback);
   }
 })();
