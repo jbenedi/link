@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install Octokit dependency
+        run: npm install @octokit/rest
+
       - name: Run Link Shortener Script
         run: node js/ref.js
         env:
